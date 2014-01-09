@@ -1,0 +1,29 @@
+<!-- <ul>
+	<li ng-repeat="definition in definitions" class="col w33 m p">
+		<ul ng-include="'views/definition.html'" >
+		</ul>
+	</li>
+</ul> -->
+
+<!-- <ul>
+	<li ng-repeat="definition in mirrorDefinitons">
+		<textarea ui-codemirror="codemirrorOptions" ng-model="definition.text" codemirror-eventbinding ></textarea>
+	</li>
+</ul>-->
+
+<!-- <div ng-include="'views/definition.html'" ng-init="children = definitions;"></div> -->
+
+<li ng-repeat="group in mayuWorkspace">
+	<div class="col w33 m p" >
+		<div ng-repeat="key in mayuWorkspace[$index].effects" >
+			<textarea id="lineItem-{{$parent.$index}}-{{$index}}" ng-style="{paddingLeft: key.tab*25 + 'px' }" rows="1" msd-elastic ng-model="mayuLine[key._id].text" mayutextarea="{{$index}}" workspace="{{$parent.$index}}" ></textarea>
+		</div>
+	</div>
+</li>
+
+<!-- <ul>
+  <li ng-repeat="group in mayuWorkspace">
+    <mayuWorkspace id="{{$index}}"></mayuWorkspace>
+  </li>
+</ul>
+ -->
