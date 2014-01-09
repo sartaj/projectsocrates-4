@@ -66,40 +66,9 @@ angular.module('mayuUiApp')
 
 			console.log("LOOKUP",$rootScope.definitionLines);
 
-			$rootScope.mayuLine = {
-				'3223232' :{
-					_id: '3223232',
-					'text': 'Teach students value of starting a business',
-					'effects': ['232323','249242'],
-					'effectedBy': ['492921','249242']
-				},
-				'232323': {
-					_id: '232323',
-					'text': 'Excercise',
-					'effects': ['492921','249242'],
-					'effectedBy': ['492921','249242']	
-				},
-				'249242': {
-					_id: '249242',
-					'text': 'Teach value of teamwork',
-					'effects': ['232323','3223232'],
-					'effectedBy': ['492921','249242']				
-				},
-				'492921': {
-					_id: '492921',
-					'text': 'Teach Passion',
-					'effects': ['232323','249242'],
-					'effectedBy': ['492921','249242']	
-				},
-				'329194': {
-					_id: '329194',
-					'text': 'Teach it all',
-					'effects': ['232323','249242'],
-					'effectedBy': ['492921','249242']
-				}
-			};
+///////////////////////////////
 
-			// $rootScope.mayuWorkspace = [
+						// $rootScope.mayuWorkspace = [
 			// 	{
 			// 		_id: 'g4012032',
 			// 		effects: [
@@ -168,6 +137,40 @@ angular.module('mayuUiApp')
 			// 		]
 			// 	},
 			// ];
+
+			$rootScope.mayuLine = {
+				'3223232' :{
+					_id: '3223232',
+					'text': 'Teach students value of starting a business',
+					'effects': ['232323','249242'],
+					'effectedBy': ['492921','249242']
+				},
+				'232323': {
+					_id: '232323',
+					'text': 'Excercise',
+					'effects': ['492921','249242'],
+					'effectedBy': ['492921','249242']	
+				},
+				'249242': {
+					_id: '249242',
+					'text': 'Teach value of teamwork',
+					'effects': ['232323','3223232'],
+					'effectedBy': ['492921','249242']				
+				},
+				'492921': {
+					_id: '492921',
+					'text': 'Teach Passion',
+					'effects': ['232323','249242'],
+					'effectedBy': ['492921','249242']	
+				},
+				'329194': {
+					_id: '329194',
+					'text': 'Teach it all',
+					'effects': ['232323','249242'],
+					'effectedBy': ['492921','249242']
+				}
+			};
+
 
 			$rootScope.mayuWorkspace = [
 				{
