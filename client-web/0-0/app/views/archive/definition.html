@@ -1,6 +1,0 @@
-<li ng-repeat="line in definition">
-	<textarea rows="1" msd-elastic ng-model="definitionLines[line.id]" id="lineItem-{{$parent.$index}}-{{$index}}" ></textarea>
-	<ul ng-if="line.children.length &gt; 0">
-  		<li ng-init="definition = line.children;" ng-include="'views/definition.html'"></li>  
-	</ul>
-</li>

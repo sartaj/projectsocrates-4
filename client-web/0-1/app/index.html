@@ -10,61 +10,70 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/lib.css -->
+    <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" />
-    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/app.css -->
-<!--     <link rel="stylesheet" href="styles/structure.css">
-    <link rel="stylesheet" href="styles/typography.css">
-    <link rel="stylesheet" href="styles/screen.css"> -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+      body {
+        background: rgb(209, 201, 190);;
+      }
+      body, input {
+        font-size: 15px;
+        font-family: "Monaco";
+      }
+      body > *, input {
+        font-size: 1em;
+      }
+      input {
+        border: 0;
+        border-left: 0.2em dotted rgb(184, 184, 184);
+        padding: 0.25em;
+        padding-left: 1em;
+        background: transparent;
+      }
+      input:focus {
+        outline: none;
+        border-left-color: blue;
+      }
+      li {
+        margin: 0.5em 0;
+      }
+
+    </style>
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-app="socraticMapApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-app="mayuUiApp">
-        <div ng-view > </div>
-<!--         <div class="footer">
-            <ul>
-                <li></li>
-            </ul>
-        </div> -->
-    </div>
+    <div class="container" ng-view=""></div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js scripts/lib.js -->
+    <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/codemirror/lib/codemirror.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/angular-elastic/elastic.js"></script>
-    <script src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/app.js -->
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/services/mayumodel.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/directives/mayutextarea.js"></script>
-        <script src="scripts/services/savemayu.js"></script>
-
-        <script src="scripts/directives/archive/mayugroup.js"></script>
-        <script src="scripts/directives/archive/compileline.js"></script>
-        <script src="scripts/controllers/archive/editor-multiline.js"></script>
-        <!-- endbuild --> 
+        <script src="scripts/services/symbolMod.js"></script>
+        <script src="scripts/directives/symbolmod.js"></script>
+        <!-- endbuild -->
 </body>
 </html>

@@ -1,25 +1,27 @@
-<!-- <ul>
-	<li ng-repeat="definition in definitions" class="col w33 m p">
-		<ul ng-include="'views/definition.html'" >
-		</ul>
-	</li>
-</ul> -->
+<ul>
+    <li ng-repeat="space in workspace" class="col w33 m p" ng-init="name = symbols[space];" >
+        Hi
+        <ng-include src="'views/definition.html'"></ng-include>
+    </li>
+</ul>
 
 <!-- <ul>
-	<li ng-repeat="definition in mirrorDefinitons">
-		<textarea ui-codemirror="codemirrorOptions" ng-model="definition.text" codemirror-eventbinding ></textarea>
-	</li>
+    <li ng-repeat="definition in mirrorDefinitons">
+        <textarea ui-codemirror="codemirrorOptions" ng-model="definition.text" codemirror-eventbinding ></textarea>
+    </li>
 </ul>-->
 
 <!-- <div ng-include="'views/definition.html'" ng-init="children = definitions;"></div> -->
 
-<li ng-repeat="group in mayuWorkspace">
-	<div class="col w33 m p" >
-		<div ng-repeat="key in mayuWorkspace[$index].effects" >
-			<textarea id="lineItem-{{$parent.$index}}-{{$index}}" ng-style="{paddingLeft: key.tab*25 + 'px' }" rows="1" msd-elastic ng-model="mayuLine[key._id].text" mayutextarea="{{$index}}" workspace="{{$parent.$index}}" ></textarea>
-		</div>
-	</div>
-</li>
+<!--<li ng-repeat="group in mayuWorkspace">
+    <div class="col w33 m p" style="padding: 10px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2)" >
+        <div ng-repeat="key in mayuWorkspace[$index].effects" ng-style="{paddingLeft: key.tab*25 + 'px' }" >
+            <div style="padding: 5px 0">
+            <textarea id="lineItem-{{$parent.$index}}-{{$index}}" rows="1" msd-elastic ng-model="mayuLine[key._id].text" mayutextarea="{{$index}}" workspace="{{$parent.$index}}" ></textarea>
+            </div>
+        </div>
+    </div>
+</li>-->
 
 <!-- <ul>
   <li ng-repeat="group in mayuWorkspace">

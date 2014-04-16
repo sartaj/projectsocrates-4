@@ -75,6 +75,20 @@ angular.module('mayuUiApp')
                 }
             };
 
+                function textSelect(inp, s, e) {
+                    e = e || s;
+                    if (inp.createTextRange) {
+                        var r = inp.createTextRange();
+                        r.collapse(true);
+                        r.moveEnd('character', e);
+                        r.moveStart('character', s);
+                        r.select();
+                    }else if(inp.setSelectionRange) {
+                        inp.focus();
+                        inp.setSelectionRange(s, e);
+                    }
+                }
+
             var makeId = function () {
                 var text = "";
                 var possible = "0123456789";
@@ -97,35 +111,45 @@ angular.module('mayuUiApp')
                     // Model
                     workspaceIndex = parseInt(attrs.workspace),
                     workspace = $rootScope.mayuWorkspace[workspaceIndex],
+                    
                     lines = workspace.effects,
-                    lineIndex = parseInt(attrs.mayutextarea),
-                    currentLine = lines[lineIndex],
+
+                    currentLineIndex = parseInt(attrs.mayutextarea),
+                    currentLine = lines[currentLineIndex],
+                    currentLineEl = document.getElementById('lineItem-' + workspaceIndex + '-' + currentLineIndex),
+                    
+                    previousLineIndex = currentLineIndex-1,
+                    previousLine = lines[previousLineIndex],
+                    previousLineEl = document.getElementById('lineItem-' + workspaceIndex + '-' + previousLineIndex),
+
+                    nextLinexIndex = currentLineIndex+1,
+                    nextLine = lines[nextLinexIndex],
+                    nextLineEl = document.getElementById('lineItem-' + workspaceIndex + '-' + nextLinexIndex),
 
                     // View
-                    el = element[0],
-                    caret = getCaretPosition(el),
-                    tLength = el.value.length,
+                    caret = getCaretPosition(currentLineEl),
+                    currentValueLength = currentLineEl.value.length,
                     
                     oldLines,
-                    newLineIndex,
+                    newcurrentLineIndex,
                     newVal;
 
-
+                // Enter
                 if (e.keyCode === 13 && e.shiftKey === false) { // Enter was pressed
-    
+
                     // console.log(e);
                     oldLines = angular.copy(lines);
 
                     e.preventDefault();
 
                         // Add new line
-                        newLineIndex = lineIndex + 1;
-                        lines.splice(newLineIndex, 0 , { _id: makeId(), tab: currentLine.tab })
+                        newcurrentLineIndex = currentLineIndex + 1;
+                        lines.splice(newcurrentLineIndex, 0 , { _id: makeId(), tab: currentLine.tab })
 
                         // Add value to new line
-                        if(caret !== tLength) {
-                            newVal = el.value.slice(caret,tLength);
-                            $rootScope.mayuLine[currentLine._id].text = el.value.slice(0,caret);
+                        if(caret !== currentValueLength) {
+                            newVal = currentLineEl.value.slice(caret,currentValueLength);
+                            $rootScope.mayuLine[currentLine._id].text = currentLineEl.value.slice(0,caret);
                         }
 
                         // Apply scope
@@ -135,11 +159,11 @@ angular.module('mayuUiApp')
                         $scope.$emit('newIds', _.pluck(lines, '_id'), workspaceIndex, newVal);
 
                         // Focus on new Element
-                        document.getElementById('lineItem-' + workspaceIndex + '-' + newLineIndex).focus();
+                        document.getElementById('lineItem-' + workspaceIndex + '-' + newcurrentLineIndex).focus();
 
                     return false;
                 }
-
+                // Tab + Shift Tab
                 if (e.keyCode === 9) {
                     e.preventDefault();
 
@@ -153,6 +177,50 @@ angular.module('mayuUiApp')
                         
                     return false;
                 }
+                // Left
+                if (e.keyCode === 37 && e.shiftKey === false) {
+                    if (caret === 0 && previousLine) {
+                        e.preventDefault()
+                        textSelect(previousLineEl,$rootScope.mayuLine[previousLine._id].text.length);
+                        return false;
+                    } 
+                }
+
+                // Up
+                if (e.keyCode === 38 && e.shiftKey === false) {
+                    if (previousLine) {
+                        e.preventDefault();
+                        textSelect(previousLineEl, caret)
+                        return false;
+                    } 
+                }
+
+                // Right
+                if (e.keyCode === 39 && e.shiftKey === false) {
+                    if (caret === currentValueLength && nextLine) {
+                        e.preventDefault();
+                        textSelect(nextLineEl,0);
+                        return false;
+                    }
+                }
+
+
+                // Down
+                if (e.keyCode === 40 && e.shiftKey === false) {
+                    if (nextLine) {
+                        e.preventDefault();
+                        textSelect(nextLineEl, caret)
+                        return false;
+                    } 
+                }
+                
+                // Right
+
+                // Backspace
+
+                // Shift + Arrows
+
+
 
                 // $rootScope.$watchCollection('mayuWorkspace[' + workspaceIndex + ']', function(newL,oldL) {
                 //     console.log("DO THAT FUCKIN", newL,oldL)
