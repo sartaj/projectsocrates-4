@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mayuUiApp')
+angular.module('symbolMapApp')
     .directive('mayutextarea', function($rootScope) {
 
         var postLink = function($scope, element, attrs) {
@@ -110,9 +110,8 @@ angular.module('mayuUiApp')
                 var 
                     // Model
                     workspaceIndex = parseInt(attrs.workspace),
-                    workspace = $rootScope.workspace[workspaceIndex],
-                    
-                    lines = workspace.effects,
+                    symbolId = $rootScope.workspace[workspaceIndex],
+                    lines = $rootScope.symbols[symbolId],
 
                     currentLineIndex = parseInt(attrs.mayutextarea),
                     currentLine = lines[currentLineIndex],
@@ -144,12 +143,13 @@ angular.module('mayuUiApp')
 
                         // Add new line
                         newcurrentLineIndex = currentLineIndex + 1;
-                        lines.splice(newcurrentLineIndex, 0 , { _id: makeId(), tab: currentLine.tab })
+                        lines.splice(newcurrentLineIndex, 0 , { meta: {id: makeId()}, tab: currentLine.tab, media: {} })
 
                         // Add value to new line
                         if(caret !== currentValueLength) {
                             newVal = currentLineEl.value.slice(caret,currentValueLength);
-                            $rootScope.mayuLine[currentLine._id].text = currentLineEl.value.slice(0,caret);
+                            console.log("CURRENTLINE", $rootScope.symbols[currentLine.meta.id])
+                            $rootScope.symbols[currentLine.meta.id][0].media.text = currentLineEl.value.slice(0,caret);
                         }
 
                         // Apply scope
@@ -181,7 +181,7 @@ angular.module('mayuUiApp')
                 if (e.keyCode === 37 && e.shiftKey === false) {
                     if (caret === 0 && previousLine) {
                         e.preventDefault()
-                        textSelect(previousLineEl,$rootScope.mayuLine[previousLine._id].text.length);
+                        textSelect(previousLineEl,$rootScope.symbols[previousLine._id].text.length);
                         return false;
                     } 
                 }

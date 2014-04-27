@@ -21,7 +21,6 @@ angular.module('socraticMapApp', [
     //////////////
     $rootScope.workspace = ['23423423', '5029592', '53535321', '03020323' ];
 
-
     $rootScope.symbols = {};
 
     $rootScope.symbols['23423423'] = [{

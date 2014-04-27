@@ -1,0 +1,10 @@
+<ul style="padding: 2em">
+  <li ng-repeat="id in workspace" style="background:rgba(0,0,0,0.00);list-style-type:none; border: 0.0em solid rgba(0, 0, 0, 0.05);margin-bottom:2em; padding: 0.5em" >
+   <ul style="padding-left: 0">
+      <li ng-repeat="item in symbols[id]" ng-style="{marginLeft:2*item.tab+'em'}" style="list-style-type:none;padding:0.33em">
+        <!--<input mayutextarea="{{$index}}" id="lineItem-{{$parent.$index}}-{{$index}}" type="text" workspace="{{$parent.$index}}" id="{{x}}" ng-model="symbols[item.meta.id][0].media.text" />-->
+        <input symbollinemod parentsymbolid="{{workspace[$parent.$index]}}" lineindex="{{$index}}" id="{{workspace[$parent.$index]}}-{{$index}}" type="text" workspace="{{$parent.$index}}" ng-model="symbols[item.meta.id][0].media.text" />
+      </li>
+   </ul>
+ </li>
+</ul>
