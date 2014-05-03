@@ -134,39 +134,51 @@ angular.module( 'symbolMapApp' )
 
             element.bind( 'keydown', function ( e ) {
 
+
+                /*
+                 **  Get Attribute from DOM based on where event was placed.
+                 **  This includes workspace, symbol, current line, previous line, and following line
+                 **  @angularDependecies directive attrs , $rootScope
+                 */
+
                 // Get Attributes from DOM. Uses Angular attrs to get attributes.
+                console.groupCollapsed( "Input Bind Variables" );
 
                 var workspaceIndex = parseInt( attrs.workspace ),
                     parentSymbolId = attrs.parentsymbolid,
                     symbolArray = $rootScope.symbols[ parentSymbolId ];
-                    console.log(workspaceIndex, parentSymbolId, symbolArray );
-                
-                var 
-                    currentLineIndex = parseInt( attrs.lineindex ),
+                console.log( workspaceIndex, parentSymbolId, symbolArray );
+
+                var currentLineIndex = parseInt( attrs.lineindex ),
                     currentLine = symbolArray[ currentLineIndex ],
                     currentLineMainSymbolId = currentLine.meta.id,
                     currentLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
-                    console.log(currentLineIndex, currentLine, currentLineMainSymbolId, currentLineEl );
+                console.log( "%c CURRENT", "font-weight: bold; color: green", currentLineIndex, currentLine, currentLineMainSymbolId, currentLineEl );
 
-                var 
-                    previousLineIndex = currentLineIndex - 1,
-                    previousLine = symbolArray[ previousLineIndex ],
-                    previousLineMainSymbolId = previousLine.meta.id,
-                    previousLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
-                    console.log( previousLineIndex, previousLine, previousLineMainSymbolId, previousLineEl);
-    
+                if ( currentLineIndex > 0 ) {
+                    var previousLineIndex = currentLineIndex - 1,
+                        previousLine = symbolArray[ previousLineIndex ],
+                        previousLineMainSymbolId = previousLine.meta.id,
+                        previousLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
+                    console.log( "%c PREVIOUS", "font-weight: bold; color: green", previousLineIndex, previousLine, previousLineMainSymbolId, previousLineEl );
+                }
+
+                if ( currentLineIndex < symbolArray.length - 1 ) {
+                    var nextLineIndex = currentLineIndex + 1,
+                        nextLine = symbolArray[ nextLineIndex ],
+                        nextLineMainSymbolId = nextLine.meta.id,
+                        nextLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
+                    console.log( "%c NEXT", "font-weight: bold; color: green", nextLineIndex, nextLine, nextLineMainSymbolId, nextLineEl );
+                }
+
+                console.groupEnd( );
+
                 var
-                    nextLineIndex = currentLineIndex + 1,
-                    nextLine = symbolArray[ nextLineIndex ],
-                    nextLineMainSymbolId = nextLine.meta.id,
-                    nextLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
-                    console.log( nextLineIndex, nextLine, nextLineMainSymbolId, nextLineEl);
-                var
-                    // View
-                    caret = getCaretPosition( currentLineEl ),
+                // View
+                caret = caretPosition.get( currentLineEl ),
                     currentValueLength = currentLineEl.value.length,
 
-                    oldLines,
+                    oldSymbolArray,
                     newcurrentLineIndex,
                     newVal;
 
@@ -174,13 +186,13 @@ angular.module( 'symbolMapApp' )
                 if ( e.keyCode === 13 && e.shiftKey === false ) { // Enter was pressed
 
                     // console.log(e);
-                    oldLines = angular.copy( lines );
+                    oldSymbolArray = Object.create( symbolArray );
 
                     e.preventDefault( );
 
                     // Add new line
                     newcurrentLineIndex = currentLineIndex + 1;
-                    lines.splice( newcurrentLineIndex, 0, {
+                    symbolArray.splice( newcurrentLineIndex, 0, {
                         meta: {
                             id: makeId( )
                         },
@@ -199,10 +211,10 @@ angular.module( 'symbolMapApp' )
                     $rootScope.$apply( );
 
                     // Emit Ids from this workspace to mayumodel.js
-                    $scope.$emit( 'newIds', _.pluck( lines, '_id' ), workspaceIndex, newVal );
+                    $scope.$emit( 'newIds', _.pluck( symbolArray, '_id' ), workspaceIndex, newVal );
 
                     // Focus on new Element
-                    document.getElementById( 'lineItem-' + workspaceIndex + '-' + newcurrentLineIndex )
+                    document.getElementById( parentSymbolId + '-' + newcurrentLineIndex )
                         .focus( );
 
                     return false;
