@@ -105,18 +105,6 @@ function textSelect( inp, s, e ) {
 
 
 
-function makeId( ) {
-    var text = "";
-    var possible = "0123456789";
-
-    for ( var i = 0; i < 7; i++ )
-        text += possible.charAt( Math.floor( Math.random( ) * possible.length ) );
-
-    return text;
-};
-
-
-
 
 
 //////////////////////////////
@@ -124,13 +112,11 @@ function makeId( ) {
 
 
 angular.module( 'symbolMapApp' )
-    .directive( 'symbollinemod', function ( $rootScope ) {
+    .directive( 'symbollinemod', function ( $rootScope, symFlatModelTransforms ) {
 
         'use strict';
 
         var postLink = function ( $scope, element, attrs ) {
-
-
 
             element.bind( 'keydown', function ( e ) {
 
@@ -185,39 +171,16 @@ angular.module( 'symbolMapApp' )
                 // Enter
                 if ( e.keyCode === 13 && e.shiftKey === false ) { // Enter was pressed
 
-                    // console.log(e);
-                    oldSymbolArray = Object.create( symbolArray );
-
                     e.preventDefault( );
 
-                    // Add new line
-                    newcurrentLineIndex = currentLineIndex + 1;
-                    symbolArray.splice( newcurrentLineIndex, 0, {
-                        meta: {
-                            id: makeId( )
-                        },
-                        tab: currentLine.tab,
-                        media: {}
-                    } )
+                    // Create New Line
+                    symFlatModelTransforms.addNewLine( parentSymbolId, currentLineIndex );
 
-                    // Add value to new line
-                    if ( caret !== currentValueLength ) {
-                        newVal = currentLineEl.value.slice( caret, currentValueLength );
-                        console.log( "CURRENTLINE", $rootScope.symbols[ currentLine.meta.id ] )
-                        $rootScope.symbols[ currentLine.meta.id ][ 0 ].media.text = currentLineEl.value.slice( 0, caret );
-                    }
-
-                    // Apply scope
-                    $rootScope.$apply( );
-
-                    // Emit Ids from this workspace to mayumodel.js
-                    $scope.$emit( 'newIds', _.pluck( symbolArray, '_id' ), workspaceIndex, newVal );
-
-                    // Focus on new Element
-                    document.getElementById( parentSymbolId + '-' + newcurrentLineIndex )
-                        .focus( );
+                    // Move Cursor to New line
+                    document.getElementById(parentSymbolId + '-' + (currentLineIndex+1)).focus();
 
                     return false;
+
                 }
                 // Tab + Shift Tab
                 if ( e.keyCode === 9 ) {

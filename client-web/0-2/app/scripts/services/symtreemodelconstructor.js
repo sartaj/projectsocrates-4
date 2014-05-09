@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('symbolMapAppApp')
+angular.module('symbolMapApp')
   .factory('symTreeModelConstructor', function () {
     // Service logic
     // ...
