@@ -52,46 +52,74 @@ angular.module( 'symbolMapApp' )
         
         }
 
+        function applyWorkspace() {
+            for (var key in $rootScope.symbols) {
+                if($rootScope.workspace.indexOf(key) < 0){
+                    $rootScope.workspace.push(key)
+                }
+            }
+        }
+
         function addNewLine( symbolId, currentLineIndex ) {
+
+            console.groupCollapsed("Add New Line");
 
             var symbolArray = $rootScope.symbols[ symbolId ],
                 currentLine = symbolArray[ currentLineIndex ],
                 newCurrentLineIndex,
-                oldSymbolArray;
+                oldSymbolArray,
+                symbolId = symbolObjectConstructor();
 
 
             // Create new symbol
-
             oldSymbolArray = Object.create( symbolArray );
 
-            // Add new line
-            var symbolId = symbolObjectConstructor();
-            
+            // Add new line            
             console.log("SYMBOLID", symbolId, $rootScope.symbols[symbolId]);
 
             newCurrentLineIndex = currentLineIndex + 1;
             symbolArray.splice( newCurrentLineIndex, 0, lineObjectConstructor(symbolId, currentLine.tab) );
             console.log(symbolArray)
 
-            // // Add value to new line
-            // if ( caret !== currentValueLength ) {
-            //     newVal = currentLineEl.value.slice( caret, currentValueLength );
-            //     console.log( "CURRENTLINE", $rootScope.symbols[ currentLine.meta.id ] )
-            //     $rootScope.symbols[ currentLine.meta.id ][ 0 ].media.text = currentLineEl.value.slice( 0, caret );
-            // }
+            // TODO: Remove this for MVP
+            applyWorkspace();
 
             // Apply scope
             $rootScope.$apply( );
 
+            console.groupEnd();
 
-            // // Emit Ids from this workspace to mayumodel.js
-            // $scope.$emit( 'newIds', _.pluck( symbolArray, '_id' ), workspaceIndex, newVal );
+        }
 
-            // // Focus on new Element
-            // document.getElementById( parentSymbolId + '-' + newcurrentLineIndex )
-            //     .focus( );
+        function deleteLine( symbolId, currentLineIndex ) {
+
+            console.groupCollapsed("Delete Line");
+
+            var symbolArray = $rootScope.symbols[ symbolId ],
+                currentLine = symbolArray[ currentLineIndex ],
+                oldSymbolArray,
+                symbolId = symbolObjectConstructor();
+
+            // Create new symbol
+            oldSymbolArray = Object.create( symbolArray );
+
+            // Add new line            
+            console.log("SYMBOLID", symbolId, $rootScope.symbols[symbolId]);
+            symbolArray.splice( currentLineIndex, 1);
+            console.log(symbolArray)
 
 
+            // Apply scope
+            $rootScope.$apply( );
+
+            console.groupEnd();
+
+        }
+        
+        function deleteSymbol(symbolId) {
+
+            delete $rootScope.symbols[symbolId];
+        
         }
 
         // Public API here

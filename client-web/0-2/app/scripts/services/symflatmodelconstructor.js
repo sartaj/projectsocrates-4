@@ -80,6 +80,7 @@ angular.module( 'symbolMapApp' )
                 'completion': 100,
                 'id': '53535321'
             },
+            'tab': 0,
             'media': {
                 'text': 'Intended Future: Make it possible to use mayu for myself'
             }
@@ -98,6 +99,7 @@ angular.module( 'symbolMapApp' )
                 'completion': 100,
                 'id': '03020323'
             },
+            'tab': 0,            
             'media': {
                 'text': 'Lose Weight'
             }
@@ -116,6 +118,7 @@ angular.module( 'symbolMapApp' )
                 'completion': 100,
                 'id': '5029592'
             },
+            'tab': 0,
             'media': {
                 'text': 'Gain Weight'
             }

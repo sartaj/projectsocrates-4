@@ -128,36 +128,36 @@ angular.module( 'symbolMapApp' )
                  */
 
                 // Get Attributes from DOM. Uses Angular attrs to get attributes.
-                console.groupCollapsed( "Input Bind Variables" );
+                // console.groupCollapsed( "Input Bind Variables" );
 
                 var workspaceIndex = parseInt( attrs.workspace ),
                     parentSymbolId = attrs.parentsymbolid,
                     symbolArray = $rootScope.symbols[ parentSymbolId ];
-                console.log( workspaceIndex, parentSymbolId, symbolArray );
+                // console.log( workspaceIndex, parentSymbolId, symbolArray );
 
                 var currentLineIndex = parseInt( attrs.lineindex ),
                     currentLine = symbolArray[ currentLineIndex ],
                     currentLineMainSymbolId = currentLine.meta.id,
                     currentLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
-                console.log( "%c CURRENT", "font-weight: bold; color: green", currentLineIndex, currentLine, currentLineMainSymbolId, currentLineEl );
+                // console.log( "%c CURRENT", "font-weight: bold; color: green", currentLineIndex, currentLine, currentLineMainSymbolId, currentLineEl );
 
                 if ( currentLineIndex > 0 ) {
                     var previousLineIndex = currentLineIndex - 1,
                         previousLine = symbolArray[ previousLineIndex ],
                         previousLineMainSymbolId = previousLine.meta.id,
-                        previousLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
-                    console.log( "%c PREVIOUS", "font-weight: bold; color: green", previousLineIndex, previousLine, previousLineMainSymbolId, previousLineEl );
+                        previousLineEl = document.getElementById( parentSymbolId + '-' + previousLineIndex );
+                    // console.log( "%c PREVIOUS", "font-weight: bold; color: green", previousLineIndex, previousLine, previousLineMainSymbolId, previousLineEl );
                 }
 
                 if ( currentLineIndex < symbolArray.length - 1 ) {
                     var nextLineIndex = currentLineIndex + 1,
                         nextLine = symbolArray[ nextLineIndex ],
                         nextLineMainSymbolId = nextLine.meta.id,
-                        nextLineEl = document.getElementById( parentSymbolId + '-' + currentLineIndex );
-                    console.log( "%c NEXT", "font-weight: bold; color: green", nextLineIndex, nextLine, nextLineMainSymbolId, nextLineEl );
+                        nextLineEl = document.getElementById( parentSymbolId + '-' + nextLineIndex );
+                    // console.log( "%c NEXT", "font-weight: bold; color: green", nextLineIndex, nextLine, nextLineMainSymbolId, nextLineEl );
                 }
 
-                console.groupEnd( );
+                // console.groupEnd( );
 
                 var
                 // View
@@ -201,7 +201,7 @@ angular.module( 'symbolMapApp' )
                 if ( e.keyCode === 37 && e.shiftKey === false ) {
                     if ( caret === 0 && previousLine ) {
                         e.preventDefault( )
-                        textSelect( previousLineEl, $rootScope.symbols[ previousLine._id ].text.length );
+                        textSelect( previousLineEl, previousLineEl.value.length );
                         return false;
                     }
                 }
@@ -229,7 +229,7 @@ angular.module( 'symbolMapApp' )
                 if ( e.keyCode === 40 && e.shiftKey === false ) {
                     if ( nextLine ) {
                         e.preventDefault( );
-                        textSelect( nextLineEl, caret )
+                        caretPosition.set( nextLineEl, caret )
                         return false;
                     }
                 }
