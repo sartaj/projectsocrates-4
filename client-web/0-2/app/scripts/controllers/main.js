@@ -1,9 +1,23 @@
-angular.module( 'symbolMapApp' )
-    .controller( 'MainCtrl', function ( $scope, $rootScope, symFlatModelConstructor ) {
+angular.module('symbolMapApp')
+    .controller('MainCtrl', function($scope, $rootScope, symFlatModelConstructor, storage) {
 
         'use strict';
 
-        $rootScope.workspace = [ '23423423', '5029592', '53535321', '03020323' ];
+        $rootScope.workspace = [];
 
+        $rootScope.symbols = storage.get();
 
-    } );
+        symFlatModelConstructor.applyWorkspace();
+
+        console.log($rootScope.symbols);
+
+        if (!$rootScope.symbols || $rootScope.symbols.length < 1) {
+            $rootScope.symbols = {};
+            symFlatModelConstructor.makeSymbol();
+        }
+
+        $scope.clearStorage = function() {
+            storage.clearStorage();
+        };
+
+    });

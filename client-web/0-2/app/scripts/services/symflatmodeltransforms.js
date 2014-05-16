@@ -1,75 +1,19 @@
 'use strict';
 
 angular.module( 'symbolMapApp' )
-    .factory( 'symFlatModelTransforms', function ( $rootScope ) {
-        // Service logic
-        // ...
+    .factory( 'symFlatModelTransforms', function ( $rootScope, symFlatModelConstructor ) {
 
         var symbols = $rootScope.symbols;
-
-        function makeId( ) {
-            var text = "";
-            var possible = "0123456789";
-
-            for ( var i = 0; i < 7; i++ )
-                text += possible.charAt( Math.floor( Math.random( ) * possible.length ) );
-
-            return text;
-        }
-
-        function symbolObjectConstructor() {
-
-            var id = makeId();
-            
-            $rootScope.symbols[id] = [{
-                meta: {
-                    id: id
-                },
-                tab: 0,
-                media: {
-                    text: ""
-                }
-                
-            }];
-
-            return id
-        
-        }
-
-        function lineObjectConstructor(symbolId,tabNumber) {
-
-            return {
-                'meta': {
-                    'id': symbolId
-                },
-                'tab': tabNumber,
-                '•': false,
-                '->': true,
-                '?': true,
-                '-': false,
-                'priority': 1.0
-            }
-        
-        }
-
-        function applyWorkspace() {
-            for (var key in $rootScope.symbols) {
-                if($rootScope.workspace.indexOf(key) < 0){
-                    $rootScope.workspace.push(key)
-                }
-            }
-        }
 
         function addNewLine( symbolId, currentLineIndex ) {
 
             console.groupCollapsed("Add New Line");
 
-            var symbolArray = $rootScope.symbols[ symbolId ],
-                currentLine = symbolArray[ currentLineIndex ],
+            var symbolArray = $rootScope.symbols[ ( symbolId || symFlatModelConstructor.makeId() ) ],
+                currentLine = symbolArray[ ( currentLineIndex || 0 ) ],
                 newCurrentLineIndex,
                 oldSymbolArray,
-                symbolId = symbolObjectConstructor();
-
+                symbolId = symFlatModelConstructor.makeSymbol();
 
             // Create new symbol
             oldSymbolArray = Object.create( symbolArray );
@@ -78,11 +22,8 @@ angular.module( 'symbolMapApp' )
             console.log("SYMBOLID", symbolId, $rootScope.symbols[symbolId]);
 
             newCurrentLineIndex = currentLineIndex + 1;
-            symbolArray.splice( newCurrentLineIndex, 0, lineObjectConstructor(symbolId, currentLine.tab) );
+            symbolArray.splice( newCurrentLineIndex, 0, symFlatModelConstructor.makeLine(symbolId, currentLine.tab) );
             console.log(symbolArray)
-
-            // TODO: Remove this for MVP
-            applyWorkspace();
 
             // Apply scope
             $rootScope.$apply( );
@@ -96,18 +37,9 @@ angular.module( 'symbolMapApp' )
             console.groupCollapsed("Delete Line");
 
             var symbolArray = $rootScope.symbols[ symbolId ],
-                currentLine = symbolArray[ currentLineIndex ],
-                oldSymbolArray,
-                symbolId = symbolObjectConstructor();
+                currentLine = symbolArray[ currentLineIndex ];
 
-            // Create new symbol
-            oldSymbolArray = Object.create( symbolArray );
-
-            // Add new line            
-            console.log("SYMBOLID", symbolId, $rootScope.symbols[symbolId]);
             symbolArray.splice( currentLineIndex, 1);
-            console.log(symbolArray)
-
 
             // Apply scope
             $rootScope.$apply( );
@@ -124,7 +56,9 @@ angular.module( 'symbolMapApp' )
 
         // Public API here
         return {
-            addNewLine: addNewLine
+            addNewLine: addNewLine,
+            deleteLine: deleteLine,
+            deleteSymbol: deleteSymbol
         }
 
     } );

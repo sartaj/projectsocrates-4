@@ -112,7 +112,7 @@ function textSelect( inp, s, e ) {
 
 
 angular.module( 'symbolMapApp' )
-    .directive( 'symbollinemod', function ( $rootScope, symFlatModelTransforms ) {
+    .directive( 'symbollinemod', function ( $rootScope, symFlatModelTransforms, storage ) {
 
         'use strict';
 
@@ -224,7 +224,6 @@ angular.module( 'symbolMapApp' )
                     }
                 }
 
-
                 // Down
                 if ( e.keyCode === 40 && e.shiftKey === false ) {
                     if ( nextLine ) {
@@ -236,10 +235,28 @@ angular.module( 'symbolMapApp' )
 
                 // Right
 
-                // Backspace
+                // Shift + Backspace
+                if ( e.keyCode === 8 && e.shiftKey === true ) {
+                    if(currentLineIndex === 0) {
+                        symFlatModelTransforms.deleteSymbol( parentSymbolId );
+                    } else {
+                        symFlatModelTransforms.deleteLine( parentSymbolId, currentLineIndex );
+                        document.getElementById(parentSymbolId + '-' + (currentLineIndex-1)).focus();
+                    }
+                }
 
                 // Shift + Arrows
 
+                // Command + S
+                if ( e.keyCode === 83 && e.metaKey === true ) {
+
+                    e.preventDefault();
+
+                        storage.put();
+
+                    return false;
+
+                }
 
             } );
         };
