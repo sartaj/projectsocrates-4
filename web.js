@@ -8,7 +8,7 @@ var app = express();
 
 // app.use(logfmt.requestLogger());
 
-var homeUrl = process.env.PWD + "/client-web/0-2/dist"; 
+var homeUrl = process.env.PWD + "/client-web/0-2/dist/"; 
 
 console.log('Directory: ', homeUrl);
 
