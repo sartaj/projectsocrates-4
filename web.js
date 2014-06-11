@@ -12,7 +12,7 @@ var homeUrl = process.env.PWD + "/client-web/0-2/dist";
 // app.use(gzippo.staticGzip(homeUrl));
 
 app.get('/', function(request, response) {
-    response.sendfile(homeUrl + '/index.html');
+    response.sendfile("" + homeUrl + '/index.html');
 }).configure(function() {
     app.use('/', express.static(homeUrl));
 }).listen(port);
