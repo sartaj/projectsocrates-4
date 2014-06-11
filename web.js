@@ -7,7 +7,7 @@ var port = Number(process.env.PORT || 5000);
 process.env.PWD = process.cwd()
 var homeUrl = process.env.PWD + "/client-web/0-2/dist"; 
 
-// app.use(logfmt.requestLogger());
+app.use(logfmt.requestLogger());
 
 // app.use(gzippo.staticGzip(homeUrl));
 
