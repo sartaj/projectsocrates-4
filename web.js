@@ -1,7 +1,5 @@
-var gzippo = require('gzippo');
 var express = require('express');
-var logfmt = require("logfmt");
-var app = express();
+var app = express().createServer();
 
 app.use("/", express.static(__dirname + "/client-web/0-2/dist"));
 
