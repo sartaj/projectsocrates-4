@@ -1,44 +1,21 @@
-var http = require("http"),
-    url = require("url"),
-    path = require("path"),
-    fs = require("fs")
-    port = process.argv[2] || 8888;
+var gzippo = require('gzippo');
+var express = require('express');
+var logfmt = require("logfmt");
+var app = express();
+var port = Number(process.env.PORT || 5000);
 
-http.createServer(function (request, response) {
+process.env.PWD = process.cwd()
+var homeUrl = process.env.PWD + "/client-web/0-2/dist"; 
 
-    var uri = url.parse(request.url)
-        .pathname,
-        filename = path.join(process.cwd(), uri, '/client-web/0-2/dist');
+app.use(logfmt.requestLogger());
 
-    path.exists(filename, function (exists) {
-        if (!exists) {
-            response.writeHead(404, {
-                "Content-Type": "text/plain"
-            });
-            response.write("404 Not Found\n");
-            response.end();
-            return;
-        }
+// app.use(gzippo.staticGzip(homeUrl));
 
-        if (fs.statSync(filename)
-            .isDirectory()) filename += '/index.html';
-
-        fs.readFile(filename, "binary", function (err, file) {
-            if (err) {
-                response.writeHead(500, {
-                    "Content-Type": "text/plain"
-                });
-                response.write(err + "\n");
-                response.end();
-                return;
-            }
-
-            response.writeHead(200);
-            response.write(file, "binary");
-            response.end();
-        });
-    });
-})
-    .listen(parseInt(port, 10));
-
-console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
+app.get('/', function(request, response) {
+    response.sendfile(homeUrl + '/index.html');
+}).configure(function() {
+    app.use('/', express.static(homeUrl));
+}).listen(port, function(){
+	console.log("====URL:==== ", homeUrl);
+	console.log("PORT AT", port);
+});
