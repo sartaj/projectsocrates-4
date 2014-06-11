@@ -1,0 +1,9 @@
+<!-- <textarea rows="1" msd-elastic ng-model="symbols[symbol[$index].meta.id][$index].media.text" id="{{$parent.$index}} " mayutextarea="{{$index}}" ></textarea> -->
+<!-- {{symbol}} -->{{symbols[name.meta.id].media.text}}
+{{name.link.length}}
+<ul ng-if="name.link.length &gt; 0 ">
+	<li ng-repeat="name in name.link" >
+		{{symbols[name.meta.id].media.text}}
+   		<li ng-include="'views/definition.html'" ng-init="name"></li>
+	</li>
+</ul>
