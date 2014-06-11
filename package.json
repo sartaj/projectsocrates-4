@@ -1,0 +1,24 @@
+{
+  "name": "socraticmap-webclient",
+  "version": "0.0.1",
+  "description": "Web client for Socratic Map.",
+  "main": "web.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sartaj/mayu-4.git"
+  },
+  "author": "Sartaj",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/sartaj/mayu-4/issues"
+  },
+  "homepage": "https://github.com/sartaj/mayu-4",
+  "dependencies": {
+    "express": "^4.4.2",
+    "gzippo": "^0.2.0",
+    "logfmt": "^1.1.2"
+  }
+}
