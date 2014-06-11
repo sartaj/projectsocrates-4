@@ -4,7 +4,7 @@ var logfmt = require("logfmt");
 var app = express();
 
 process.env.PWD = process.cwd()
-var homeUrl = process.env.PWD + "client-web/0-2/dist";
+var homeUrl = process.env.PWD + "/client-web/0-2/dist";
 
 app.use(logfmt.requestLogger());
 
