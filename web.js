@@ -1,17 +1,18 @@
 var gzippo = require('gzippo');
 var express = require('express');
 var logfmt = require("logfmt");
-var app = express();
+var app = express.createServer();
+var port = Number(process.env.PORT || 5000);
 
 process.env.PWD = process.cwd()
 var homeUrl = process.env.PWD + "/client-web/0-2/dist"; 
 
-app.use(logfmt.requestLogger());
+// app.use(logfmt.requestLogger());
 
-app.use(gzippo.staticGzip(homeUrl));
+// app.use(gzippo.staticGzip(homeUrl));
 
-var port = Number(process.env.PORT || 5000);
-
-app.listen(port, function() {
-  console.log("Listening on " + port);
-}); 
+app.get('/', function(request, response) {
+    response.sendfile(__dirname + '/index.html');
+}).configure(function() {
+    app.use('/', express.static(homeUrl));
+}).listen(port);

@@ -4,7 +4,7 @@
   "description": "socratic map",
   "main": "web.js",
   "dependencies": {
-    "express": "^4.4.2",
+    "express": "~3.4.7",
     "gzippo": "^0.2.0",
     "logfmt": "^1.1.2"
   },
