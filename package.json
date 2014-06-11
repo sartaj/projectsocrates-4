@@ -1,7 +1,7 @@
 {
   "name": "mayu-4",
   "version": "0.0.1",
-  "description": "\"socratic map\"",
+  "description": "socratic map",
   "main": "web.js",
   "dependencies": {
     "express": "^4.4.2",
@@ -10,14 +10,14 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/sartaj/mayu-4.git"
   },
   "author": "Sartaj",
-  "license": "ISC",
+  "license": "",
   "bugs": {
     "url": "https://github.com/sartaj/mayu-4/issues"
   },
