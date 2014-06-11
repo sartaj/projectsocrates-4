@@ -5,7 +5,7 @@ var app = express();
 var port = Number(process.env.PORT || 5000);
 
 process.env.PWD = process.cwd()
-var homeUrl = process.env.PWD + "/client-web/0-2/dist"; 
+var homeUrl = __dirname + "/client-web/0-2/dist"; 
 
 app.use(logfmt.requestLogger());
 
