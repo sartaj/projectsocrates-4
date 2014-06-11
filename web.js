@@ -4,9 +4,8 @@ var logfmt = require("logfmt");
 var app = express();
 
 app.use(logfmt.requestLogger());
-app.get('/', function(req, res) {
-  res.send('Hello World!');
-});
+
+app.use("/zidskaw", gzippo.staticGzip(__dirname + "/client-web/0-2/dist"));
 
 var port = Number(process.env.PORT || 5000);
 
