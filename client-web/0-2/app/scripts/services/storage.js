@@ -1,43 +1,63 @@
 'use strict';
 
 angular.module('symbolMapApp')
-    .factory('storage', function($rootScope) {
+  .factory('storage', function ($rootScope, symFlatModelConstructor) {
 
-        function put() {
-            localStore.put();
-        }
+    function put() {
+      var id = $rootScope.session.currentWorkspaceId;
+      localStore.put(id);
+    }
 
-        function get() {
-            return localStore.get();
-        }
+    function get(id) {
+      return localStore.get(id);
+    }
 
-        function clearStorage() {
-            localStore.clearStorage();
-        }
+    function clearStorage(id) {
+      localStore.clearStorage(id);
+    }
 
-        var localStore = Object.create({});
+    var localStore = Object.create({});
 
-        localStore.id  = "mvpSymbols";
+    localStore.get = function (id) {
 
-        localStore.get = function() {
-            console.log("GET", this);
-            return JSON.parse(localStorage.getItem(this.id) || '[]');
-        };
+      if (!id) {
+        // HACK: MVP CODE
+        id = 'mvpSymbols';
+        $rootScope.session.currentWorkspaceId = id;
+      }
 
-        localStore.put = function() {
-            localStorage.setItem(this.id, JSON.stringify($rootScope.symbols));
-        };
+      var sym = JSON.parse(localStorage.getItem(id));
 
-        localStore.clearStorage = function() {
-            console.log("clear", this.id);
-            localStorage.removeItem(this.id);
-        };
+      if (!sym || sym.length < 1) {
+        $rootScope.symbols = Object.create({});
+        symFlatModelConstructor.makeSymbol();
+      } else {
+        $rootScope.symbols = sym;
+      }
+      console.log($rootScope.symbols);
+      symFlatModelConstructor.applyWorkspace();
+
+    };
+
+    localStore.put = function (id) {
+
+      var saveFile = $rootScope.symbols;
+
+      console.log("put", id, saveFile);
+
+      localStorage.setItem(id, JSON.stringify(saveFile));
+
+    };
+
+    localStore.clearStorage = function (id) {
+      localStorage.removeItem(id);
+    };
 
 
-        return {
-            get: get,
-            put: put,
-            clearStorage: clearStorage
-        }
+    return {
+      get: get,
+      put: put,
+      clearStorage: clearStorage
+    }
 
-    });
+  });

@@ -123,7 +123,7 @@ angular.module( 'symbolMapApp' )
                 var
                 // Model
                 workspaceIndex = parseInt( attrs.workspace ),
-                    symbolId = $rootScope.workspace[ workspaceIndex ],
+                    symbolId = $rootScope.session.currentWorkspace[ workspaceIndex ],
                     lines = $rootScope.symbols[ symbolId ],
 
                     currentLineIndex = parseInt( attrs.mayutextarea ),

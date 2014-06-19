@@ -1,0 +1,11 @@
+<div ng-controller="HeaderCtrl">
+     <div class="topbar">
+      <ul>
+      	<li>Current Workspace: <input type="text" ng-model="session.currentWorkspaceId" /><button ng-click="getWorkspace()">Get Workspace</button></li>
+        <li><button ng-click="clearStorage()">Clear Workspace</button><button ng-click="saveStorage()">Save [CMD+S]</button></li>
+        <!--<li>Focus</li>
+        <li>Explore</li>
+        <li>Settings</li>-->
+      </ul>
+    </div>
+</div>

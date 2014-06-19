@@ -3,7 +3,7 @@
 describe('Directive: symbolLineMod', function () {
 
   // load the directive's module
-  beforeEach(module('symbolMapAppApp'));
+  beforeEach(module('symbolMapApp'));
 
   var element,
     scope;

@@ -3,7 +3,7 @@
 describe('Directive: mayutextarea', function () {
 
   // load the directive's module
-  beforeEach(module('02App'));
+  beforeEach(module('symbolMapApp'));
 
   var element,
     scope;

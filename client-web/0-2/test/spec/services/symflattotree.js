@@ -3,7 +3,7 @@
 describe('Service: symFlatToTree', function () {
 
   // load the service's module
-  beforeEach(module('symbolMapAppApp'));
+  beforeEach(module('symbolMapApp'));
 
   // instantiate service
   var symFlatToTree;

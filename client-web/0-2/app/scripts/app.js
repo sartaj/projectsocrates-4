@@ -16,4 +16,10 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function ($rootScope) {
+        $rootScope.session = {
+          'currentWorkspaceId': '',
+          'currentWorkspace': []
+        };
   });

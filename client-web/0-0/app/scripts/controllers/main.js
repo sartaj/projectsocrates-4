@@ -1,15 +1,14 @@
-'use strict';
-
 angular.module('mayuUiApp')
-	.controller('MainCtrl', function ($rootScope, $scope, mayuModel) {
+  .controller('MainCtrl', function ($rootScope, $scope, symbolModel) {
 
-		mayuModel.getModel();
+    'use strict';
 
-		// Set padding for mayuLine
-		// Dep: Directive.mayutextarea
-		// $scope.setPadding = function(tab) {
-		// 	return {paddingLeft: tab*15 + 'px' } 
-		// }
+    symbolModel.getModel();
 
-});
+    // Set padding for mayuLine
+    // Dep: Directive.mayutextarea
+    // $scope.setPadding = function(tab) {
+    //  return {paddingLeft: tab*15 + 'px' } 
+    // }
 
+  });

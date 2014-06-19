@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module( 'symbolMapApp' )
-    .factory( 'symFlatModelConstructor', function ( $rootScope, storage ) {
+    .factory( 'symFlatModelConstructor', function ( $rootScope ) {
 
         // $rootScope.symbols[ '23423423' ] = [ {
         //     'meta': {
@@ -171,9 +171,12 @@ angular.module( 'symbolMapApp' )
         }
 
         function applyWorkspace() {
+
+            $rootScope.session.currentWorkspace = [];
+
             for (var key in $rootScope.symbols) {
-                if($rootScope.workspace.indexOf(key) < 0){
-                    $rootScope.workspace.push(key)
+                if($rootScope.session.currentWorkspace.indexOf(key) < 0){
+                    $rootScope.session.currentWorkspace.push(key)
                 }
             }
         }
