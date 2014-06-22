@@ -15,15 +15,17 @@ angular.module( 'symbolMapApp' )
                 oldSymbolArray,
                 symbolId = symFlatModelConstructor.makeSymbol();
 
-            // Create new symbol
+            // Create new symbol for History
             oldSymbolArray = Object.create( symbolArray );
+
+            console.log("SYMBOLARRAY", symbolArray);
 
             // Add new line            
             console.log("SYMBOLID", symbolId, $rootScope.symbols[symbolId]);
 
             newCurrentLineIndex = currentLineIndex + 1;
             symbolArray.splice( newCurrentLineIndex, 0, symFlatModelConstructor.makeLine(symbolId, currentLine.tab) );
-            console.log(symbolArray)
+            console.log("SYMBOLARRAYAFTER", symbolArray)
 
             // Apply scope
             $rootScope.$apply( );

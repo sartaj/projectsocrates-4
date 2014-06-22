@@ -5,6 +5,7 @@ angular.module('symbolMapApp')
 
     function put() {
       var id = $rootScope.session.currentWorkspaceId;
+      console.log(id);
       localStore.put(id);
     }
 
@@ -50,7 +51,15 @@ angular.module('symbolMapApp')
     };
 
     localStore.clearStorage = function (id) {
+
       localStorage.removeItem(id);
+
+      $rootScope.session.currentWorkspaceId = id;
+      $rootScope.currentWorkspace = [];
+      $rootScope.symbols = Object.create({});
+      symFlatModelConstructor.makeSymbol();
+      symFlatModelConstructor.applyWorkspace();
+
     };
 
 

@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: save', function () {
+describe('Service: storage', function () {
 
   // load the service's module
   beforeEach(module('symbolMapApp'));
 
   // instantiate service
-  var save;
-  beforeEach(inject(function (_save_) {
-    save = _save_;
+  var storage;
+  beforeEach(inject(function (_storage_) {
+    storage = _storage_;
   }));
 
   it('should do something', function () {
-    expect(!!save).toBe(true);
+    expect(!!storage).toBe(true);
   });
 
 });

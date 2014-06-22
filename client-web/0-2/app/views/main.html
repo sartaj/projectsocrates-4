@@ -1,8 +1,8 @@
-<ul style="padding: 2em">
+<ul style="padding: 2rem">
   <li ng-repeat="id in session.currentWorkspace" class="symbol-definition" >
    <ul style="padding-left: 0">
-      <li ng-repeat="item in symbols[id] track by item.meta.id" ng-style="{marginLeft:2*item.tab+'em'}" class="symbol-lines"  >
-        <textarea symbollinemod parentsymbolid="{{session.currentWorkspace[$parent.$index]}}" lineindex="{{$index}}" id="{{session.currentWorkspace[$parent.$index]}}-{{$index}}" type="text" workspace="{{$parent.$index}}" ng-model="symbols[item.meta.id][0].media.text" rows="1" ></textarea>
+      <li ng-repeat="item in symbols[id] track by item.meta.id" ng-style="{marginLeft:2*item.tab+'rem'}" class="symbol-lines"  >
+        <textarea class="symbolInput" symbollinemod parentsymbolid="{{session.currentWorkspace[$parent.$index]}}" lineindex="{{$index}}" id="{{session.currentWorkspace[$parent.$index]}}-{{$index}}" type="text" workspace="{{$parent.$index}}" ng-model="symbols[item.meta.id][0].media.text" rows="1" ></textarea>
       </li>
    </ul>
  </li>

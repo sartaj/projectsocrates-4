@@ -17,12 +17,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <style>
-
-    </style>
-
   </head>
-  <body >
+  <body class="grid">
 
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -31,10 +27,10 @@
     <!-- Add your site or application content here -->
     <div ng-app="symbolMapApp">
     <ng-include src="'views/header.html'"></ng-include>
-    <div class="container" ng-view="" style="padding-top:2em"></div>
+    <div class="container" ng-view=""></div>
     </div>
     <div class="footer">
-      Designed By Sartaj
+      Designed &amp; Developed By Sartaj
     </div>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>

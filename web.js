@@ -1,10 +1,13 @@
 var gzippo = require('gzippo');
 var express = require('express');
+var basicAuth = require('basic-auth-connect');
 var logfmt = require("logfmt");
 var app = express();
 
 process.env.PWD = process.cwd()
 var homeUrl = process.env.PWD + "/client-web/0-2/dist";
+
+app.use(basicAuth('plato', 'franklin'));
 
 app.use(logfmt.requestLogger());
 
