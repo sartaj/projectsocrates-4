@@ -234,14 +234,15 @@ angular.module('symbolMapApp')
 
         // Shift + Backspace
         if (e.keyCode === 8 && e.shiftKey === true) {
-          if (currentLineIndex === 0) {
-            symFlatModelTransforms.deleteSymbol(parentSymbolId);
-          } else {
-            symFlatModelTransforms.deleteLine(parentSymbolId, currentLineIndex);
-            document.getElementById(parentSymbolId + '-' + (currentLineIndex - 1))
-              .focus();
-          }
+          // if (currentLineIndex === 0) {
+          //   symFlatModelTransforms.deleteSymbol(parentSymbolId);
+          // } else {
+          //   symFlatModelTransforms.deleteLine(parentSymbolId, currentLineIndex);
+          //   document.getElementById(parentSymbolId + '-' + (currentLineIndex - 1))
+          //     .focus();
+          // }
         }
+
 
         // Shift + Arrows
 
@@ -251,11 +252,24 @@ angular.module('symbolMapApp')
           e.preventDefault();
 
           // Save
-          storage.put();
+          storage.put(parentSymbolId);
 
           return false;
 
         }
+
+        // Command + L (Link File)
+        if (e.keyCode === 71 && e.metaKey === true) {
+
+          // e.preventDefault();
+
+          // // Save
+          // storage.put();
+
+          // return false;
+
+        }
+
 
       });
     };

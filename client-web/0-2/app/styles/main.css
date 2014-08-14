@@ -97,7 +97,7 @@
       .container {
         max-width: 50rem;
         margin: 0 auto;
-        padding-top: 4rem;
+        padding-top: 8rem;
       }
 
       .topbar {
@@ -111,6 +111,7 @@
         font-size: 0.75rem;
         text-align: right;
         padding: 1rem;
+        opacity: 0.1;
       }
 
       .topbar li {
@@ -132,10 +133,15 @@
         border-bottom: 0.1rem dotted rgba(0, 0, 0, 0.15);
         /*border-radius: 0.25em;*/
       }
-        .symbol-definition > ul > li:first-child textarea {
+/*        .symbol-definition > ul > li:first-child textarea {
           font-weight: bold;
           font-size: 1.5rem;
-        }
+        }*/
+
+      .tree0 textarea {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
 
       .topbar li.invisible {
         transition: opacity 1s linear;

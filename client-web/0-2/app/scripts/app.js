@@ -5,7 +5,8 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute'
+    'ngRoute',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -18,8 +19,8 @@ angular
       });
   })
   .run(function ($rootScope) {
-        $rootScope.session = {
-          'currentWorkspaceId': '',
-          'currentWorkspace': []
-        };
+    $rootScope.session = {
+      'currentWorkspaceId': '',
+      'currentWorkspace': []
+    };
   });

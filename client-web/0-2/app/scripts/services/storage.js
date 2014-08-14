@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('symbolMapApp')
-  .factory('storage', function ($rootScope, symFlatModelConstructor) {
+  .factory('storage', function ($rootScope, symFlatModelConstructor, $firebase) {
 
-    function put() {
-      var id = $rootScope.session.currentWorkspaceId;
+    function put(id) {
+      // var id = $rootScope.session.currentWorkspaceId;
       console.log(id);
       localStore.put(id);
+      fbio.put(id);
     }
 
     function get(id) {
@@ -62,6 +63,29 @@ angular.module('symbolMapApp')
 
     };
 
+    var fbio = Object.create({});
+    var fbioUrl = 'https://socraticmap.firebaseio.com/';
+    var fbdb = new Firebase(fbioUrl);
+
+
+    fbio.get = function (id) {
+
+    };
+
+    fbio.put = function (id) {
+
+      // var saveFile = {'symbols':{}};
+      // saveFile.symbols = $rootScope.symbols;
+
+      console.log("put", typeof id, id);
+
+      $rootScope.symbols = $firebase(fbdb);
+
+    };
+
+    fbio.delete = function (id) {
+
+    };
 
     return {
       get: get,

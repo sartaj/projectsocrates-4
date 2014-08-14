@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name symbolMapApp.controller:HeaderCtrl
@@ -9,10 +7,13 @@
  */
 angular.module('symbolMapApp')
   .controller('HeaderCtrl', function ($scope, $rootScope, $timeout, storage, symFlatModelConstructor) {
+  
+
+    'use strict';
 
     $timeout(function(){
       $scope.currentId = $rootScope.session.currentWorkspaceId;
-    }, 1000)
+    }, 1000);
 
     $scope.$watch('currentId', function(){
       $rootScope.session.currentWorkspaceId = $scope.currentId;
